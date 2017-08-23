@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-@JsonIgnoreProperties({"number", "first", "last"})
+@JsonIgnoreProperties({"data", "number", "first", "last", "sort"})
 public class PageableResponse<T> extends ResourceSupport implements Page<T> {
 
     Page<T> data;
@@ -68,7 +68,7 @@ public class PageableResponse<T> extends ResourceSupport implements Page<T> {
 
     @Override
     public List<T> getContent() {
-        return this.getContent();
+        return data.getContent();
     }
 
     @Override
