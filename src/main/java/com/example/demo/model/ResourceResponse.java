@@ -18,6 +18,16 @@ import java.util.List;
 @NoArgsConstructor
 public class ResourceResponse<T> extends ResourceSupport {
     T data;
-    String status;
-    String errorMessage;
+    String status = "SUCCESS";
+    String message;
+    ErrorDto errors;
+
+    public ResourceResponse(T type, String status, String message) {
+        this.data = type;
+        this.status = status;
+        this.message = message;
+    }
+    public ResourceResponse(ErrorDto errors) {
+        this.errors = errors;
+    }
 }

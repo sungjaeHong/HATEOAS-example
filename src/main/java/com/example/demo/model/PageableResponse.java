@@ -28,6 +28,8 @@ public class PageableResponse<T> extends ResourceSupport implements Page<T> {
 
     String status = "SUCCESS";
 
+    ErrorDto errors;
+
     public PageableResponse(Page<T> page) {
         data = page;
     }
