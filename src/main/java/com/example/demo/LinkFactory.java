@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.model.PageableResponse;
+import com.example.demo.model.BasePageableResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @Service
 public class LinkFactory<T> {
 
-    public PageableResponse addLink(PageableResponse pageResource, Page<T> page) {
+    public BasePageableResponse addLink(BasePageableResponse pageResource, Page<T> page) {
         if (page.hasPrevious()) {
             String path = createBuilder()
                     .queryParam("size", page.getSize())

@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Account;
-import com.example.demo.model.ResourceResponse;
+import com.example.demo.model.BaseResponse;
 import com.example.demo.model.VirtualAccount;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,15 +20,15 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class VirtualAccountController {
 
     @PostMapping(value = "/openAccount")
-    public ResourceResponse openAccount(int applicantId, String applicantType) {
+    public BaseResponse openAccount(int applicantId, String applicantType) {
         Account account = new Account();
         account.setAccountNo(1);
         account.setAccountType("PRIME_STORE");
-        account.setCreatedAt(new Date(System.currentTimeMillis()));
+        account.setCreatedAt(new Date());
         account.setCreator("sungjae.hong");
 
-        ResourceResponse resourceResponse = new ResourceResponse();
-        resourceResponse.setData(account);
+        BaseResponse resourceResponse = new BaseResponse();
+        resourceResponse.setContent(account);
         resourceResponse.setStatus("SUCCESS");
         resourceResponse.setMessage("");
         resourceResponse.add(linkTo(methodOn(VirtualAccountController.class).openVirtualAccount(applicantId, applicantType)).withRel("openVirtualBankAccount"));
@@ -37,13 +37,13 @@ public class VirtualAccountController {
     }
 
     @PostMapping(value = "/openVirtualBankAccount")
-    public ResourceResponse openVirtualAccount(int accountNo, String accountOwner) {
+    public BaseResponse openVirtualAccount(int accountNo, String accountOwner) {
         VirtualAccount virtualAccount = new VirtualAccount();
         virtualAccount.setAccountNo(accountNo);
         virtualAccount.setBankCode("");
 
-        ResourceResponse resourceResponse = new ResourceResponse();
-        resourceResponse.setData(virtualAccount);
+        BaseResponse resourceResponse = new BaseResponse();
+        resourceResponse.setContent(virtualAccount);
         resourceResponse.setStatus("SUCCESS");
         resourceResponse.setMessage("");
         resourceResponse.add(linkTo(methodOn(VirtualAccountController.class).openAccount(virtualAccount.getAccountNo(), accountOwner)).withRel("openAccount"));
@@ -52,8 +52,8 @@ public class VirtualAccountController {
     }
 
     @GetMapping(value = "/getVirtualBankAccount")
-    public ResourceResponse getVirtualBankAccount(@RequestParam Long accountNumber) {
-        return new ResourceResponse();
+    public BaseResponse getVirtualBankAccount(@RequestParam Long accountNumber) {
+        return new BaseResponse();
     }
 
 }

@@ -18,7 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 @JsonIgnoreProperties({"data", "number", "first", "last", "sort"})
-public class PageableResponse<T> extends ResourceSupport implements Page<T> {
+public class BasePageableResponse<T> extends ResourceSupport implements Page<T> {
 
     Page<T> data;
 
@@ -30,7 +30,7 @@ public class PageableResponse<T> extends ResourceSupport implements Page<T> {
 
     ErrorDto errors;
 
-    public PageableResponse(Page<T> page) {
+    public BasePageableResponse(Page<T> page) {
         data = page;
     }
 

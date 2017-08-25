@@ -6,8 +6,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.hateoas.ResourceSupport;
 
-import java.util.List;
-
 /**
  * Created by sungjae.hong on 2017. 8. 23..
  */
@@ -16,18 +14,19 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-public class ResourceResponse<T> extends ResourceSupport {
-    T data;
+public class BaseResponse<T> extends ResourceSupport {
+    T content;
     String status = "SUCCESS";
     String message;
     ErrorDto errors;
 
-    public ResourceResponse(T type, String status, String message) {
-        this.data = type;
+    public BaseResponse(T type, String status, String message) {
+        this.content = type;
         this.status = status;
         this.message = message;
     }
-    public ResourceResponse(ErrorDto errors) {
+
+    public BaseResponse(ErrorDto errors) {
         this.errors = errors;
     }
 }
